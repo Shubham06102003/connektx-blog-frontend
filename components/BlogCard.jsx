@@ -24,7 +24,7 @@ export default function BlogCard({ blog }) {
           </span>
         </div>
         
-        <Link href={`/blog/${blog.slug}`}>
+        <Link href={`/blogs/${blog.slug}`}>
           <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600 cursor-pointer">
             {blog.title}
           </h3>

@@ -51,7 +51,7 @@ export default async function CategoriesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category) => (
-              <Link key={category.id} href={`/category/${category.slug}`}>
+              <Link key={category.id} href={`/categories/${category.slug}`}>
                 <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
                   <div className="flex items-center mb-3">
                     <FolderOpen className="text-blue-600 mr-3" size={24} />
