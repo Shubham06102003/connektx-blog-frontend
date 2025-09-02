@@ -70,68 +70,68 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600">Welcome to your blog admin panel</p>
-        </div>
+      <div className="min-h-screen py-8 px-2 sm:px-0">
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="mb-2">
+            <h1 className="text-4xl font-extrabold text-blue-800 mb-1 tracking-tight">Admin Dashboard</h1>
+            <p className="text-lg text-blue-600">Welcome to your blog admin panel</p>
+          </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <FileText className="text-blue-600 mr-3" size={24} />
-              <div>
-                <p className="text-sm text-gray-600">Total Blogs</p>
-                <p className="text-2xl font-bold">{stats.totalBlogs}</p>
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white rounded-2xl shadow-md p-6 transition-transform hover:-translate-y-1 hover:shadow-lg border border-blue-100">
+              <div className="flex items-center">
+                <FileText className="text-blue-600 mr-3" size={28} />
+                <div>
+                  <p className="text-sm text-gray-500">Total Blogs</p>
+                  <p className="text-3xl font-bold text-blue-900">{stats.totalBlogs}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-6 transition-transform hover:-translate-y-1 hover:shadow-lg border border-green-100">
+              <div className="flex items-center">
+                <Users className="text-green-600 mr-3" size={28} />
+                <div>
+                  <p className="text-sm text-gray-500">Published</p>
+                  <p className="text-3xl font-bold text-green-800">{stats.publishedBlogs}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-6 transition-transform hover:-translate-y-1 hover:shadow-lg border border-purple-100">
+              <div className="flex items-center">
+                <FolderOpen className="text-purple-600 mr-3" size={28} />
+                <div>
+                  <p className="text-sm text-gray-500">Categories</p>
+                  <p className="text-3xl font-bold text-purple-800">{stats.totalCategories}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-6 transition-transform hover:-translate-y-1 hover:shadow-lg border border-orange-100">
+              <div className="flex items-center">
+                <Eye className="text-orange-600 mr-3" size={28} />
+                <div>
+                  <p className="text-sm text-gray-500">Total Views</p>
+                  <p className="text-3xl font-bold text-orange-700">{stats.totalViews}</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <Users className="text-green-600 mr-3" size={24} />
-              <div>
-                <p className="text-sm text-gray-600">Published</p>
-                <p className="text-2xl font-bold">{stats.publishedBlogs}</p>
+          <div className="border-t border-blue-100 pt-10">
+            <h3 className="text-2xl font-bold text-blue-800 mb-6">Top 5 Most Viewed Blogs</h3>
+            <div className="bg-white rounded-2xl shadow-md p-6">
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="views" fill="#3B82F6" />
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
             </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <FolderOpen className="text-purple-600 mr-3" size={24} />
-              <div>
-                <p className="text-sm text-gray-600">Categories</p>
-                <p className="text-2xl font-bold">{stats.totalCategories}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <Eye className="text-orange-600 mr-3" size={24} />
-              <div>
-                <p className="text-sm text-gray-600">Total Views</p>
-                <p className="text-2xl font-bold">{stats.totalViews}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Chart */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">Top 5 Most Viewed Blogs</h3>
-          <div className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="views" fill="#3B82F6" />
-              </BarChart>
-            </ResponsiveContainer>
           </div>
         </div>
       </div>

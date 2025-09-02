@@ -52,15 +52,15 @@ export default function AdminCategories() {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
+      <div className="space-y-8 min-h-screen py-8 px-2 sm:px-0">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-2">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Manage Categories</h1>
-            <p className="text-gray-600">Create and manage blog categories</p>
+            <h1 className="text-4xl font-extrabold text-blue-800 mb-1 tracking-tight">Manage Categories</h1>
+            <p className="text-lg text-blue-600">Create and manage blog categories</p>
           </div>
           <Link 
             href="/admin/categories/add" 
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
+            className="bg-blue-600 text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 shadow"
           >
             <Plus size={20} />
             Add Category
@@ -68,45 +68,37 @@ export default function AdminCategories() {
         </div>
 
         {loading ? (
-          <div className="text-center py-8">Loading categories...</div>
+          <div className="text-center py-12 text-blue-700 font-semibold text-lg">Loading categories...</div>
         ) : categories.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-lg shadow">
-            <p className="text-gray-500 text-lg mb-4">No categories yet</p>
+          <div className="text-center py-20 bg-white rounded-xl shadow-md">
+            <p className="text-blue-500 text-xl mb-4">No categories yet</p>
             <Link 
               href="/admin/categories/add"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 shadow"
             >
               Create Your First Category
             </Link>
           </div>
         ) : (
-          <div className="bg-white shadow rounded-lg overflow-hidden">
+          <div className="bg-white shadow-md rounded-xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+                <thead className="bg-blue-50 sticky top-0 z-10">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Name
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Slug
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Description
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Name</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Slug</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Description</th>
+                    <th className="px-6 py-3 text-right text-xs font-bold text-blue-700 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-gray-100">
                   {categories.map((category) => (
-                    <tr key={category.id} className="hover:bg-gray-50">
+                    <tr key={category.id} className="hover:bg-blue-50 transition">
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{category.name}</div>
+                        <div className="text-base font-semibold text-blue-900">{category.name}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">{category.slug}</div>
+                        <div className="text-xs text-gray-400">{category.slug}</div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm text-gray-900">{category.description}</div>
@@ -115,13 +107,13 @@ export default function AdminCategories() {
                         <div className="flex items-center gap-2 justify-end">
                           <Link 
                             href={`/admin/categories/edit/${category.id}`}
-                            className="text-indigo-600 hover:text-indigo-900"
+                            className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50"
                           >
                             <Edit size={18} />
                           </Link>
                           <button
                             onClick={() => handleDelete(category.id, category.name)}
-                            className="text-red-600 hover:text-red-900"
+                            className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
                           >
                             <Trash2 size={18} />
                           </button>

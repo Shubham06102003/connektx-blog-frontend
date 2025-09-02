@@ -36,7 +36,6 @@ export default function AddBlog() {
       await adminApi.createBlog({
         ...blogData,
         slug: blogData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-        createdBy: 'admin',
       });
       console.log('Blog created successfully');
       router.push('/admin/blogs');
