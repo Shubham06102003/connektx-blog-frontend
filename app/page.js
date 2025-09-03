@@ -22,7 +22,7 @@ async function getHomePageData() {
       publicApi.getFeaturedBlogs(),
       publicApi.getCategories(),
     ]);
-    
+
     return {
       blogs: blogsRes.data.slice(0, 6), // Latest 6 blogs
       featuredBlogs: featuredRes.data.slice(0, 3), // Top 3 featured
@@ -38,12 +38,12 @@ export default async function HomePage() {
   const { blogs, featuredBlogs, categories } = await getHomePageData();
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100">
       {/* Header */}
-  <header className="bg-white shadow-md border-b border-blue-100">
+      <header className="bg-white/90 shadow-md border-b border-blue-100 rounded-b-2xl backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-extrabold tracking-tight text-blue-700 drop-shadow-sm">
+            <Link href="/" className="text-3xl font-extrabold tracking-tight text-blue-700 drop-shadow-sm">
               ConnektX Blog
             </Link>
             <nav className="hidden md:flex space-x-8">
@@ -51,8 +51,8 @@ export default async function HomePage() {
               <Link href="/blogs" className="text-blue-500 hover:text-blue-700 font-medium transition-colors">Blogs</Link>
               <Link href="/categories" className="text-blue-500 hover:text-blue-700 font-medium transition-colors">Categories</Link>
             </nav>
-            <Link 
-              href="/admin" 
+            <Link
+              href="/admin"
               className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition-colors"
             >
               Admin
@@ -63,40 +63,50 @@ export default async function HomePage() {
 
       <main>
         {/* Featured Blogs Section */}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-400 py-12 mb-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow">Featured Blogs</h2>
-            <FeaturedSection blogs={featuredBlogs} />
-          </div>
+        <section className="bg-blue-600 py-10 mb-5 rounded-b-3xl shadow-lg relative overflow-hidden">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-lg tracking-tight animate-fadein">Featured Blogs</h2>
+          <FeaturedSection blogs={featuredBlogs} />
         </section>
 
-        {/* Categories Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 rounded-2xl bg-white/80 shadow mb-10">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-blue-700">Explore Categories</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="my-12 border-t border-blue-100" />
+        </div>
+
+        {/* Categories Section (same layout as Latest Blogs) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 animate-fadein">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-4xl font-bold text-blue-700 tracking-tight">Explore Categories</h2>
             <Link href="/categories" className="text-blue-600 hover:text-blue-800 font-medium">View All →</Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categories.slice(0, 3).map((category) => (
-              <CategoryCard key={category.id} category={category} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {categories.slice(0, 3).map((category, idx) => (
+              <div key={category.id} className={`animate-fadein ${idx % 2 === 0 ? 'animate-slide-up' : 'animate-slide-down'}`} style={{ animationDelay: `${idx * 0.1 + 0.1}s` }}>
+                <CategoryCard category={category} />
+              </div>
             ))}
           </div>
         </section>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="my-12 border-t border-blue-100" />
+        </div>
+
         {/* Latest Blogs Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-blue-700">Latest Blogs</h2>
-            <Link 
-              href="/blogs" 
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-4xl font-bold text-blue-700 tracking-tight">Latest Blogs</h2>
+            <Link
+              href="/blogs"
               className="text-blue-600 hover:text-blue-800 font-medium"
             >
               View All →
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
-              <BlogCard key={blog.id} blog={blog} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {blogs.map((blog, idx) => (
+              <div key={blog.id} className={`animate-fadein ${idx % 2 === 0 ? 'animate-slide-up' : 'animate-slide-down'}`} style={{ animationDelay: `${idx * 0.1 + 0.1}s` }}>
+                <BlogCard blog={blog} />
+              </div>
             ))}
           </div>
         </section>
