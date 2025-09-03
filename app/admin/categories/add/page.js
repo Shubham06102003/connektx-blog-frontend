@@ -112,6 +112,7 @@ import { auth } from '@/lib/auth';
 import { adminApi } from '@/lib/api';
 import AdminLayout from '@/components/AdminLayout';
 import { Save, Image } from 'lucide-react';
+import CategoryImagePreview from '@/components/CategoryImagePreview';
 
 export default function AddCategory() {
   const router = useRouter();
@@ -245,28 +246,24 @@ export default function AddCategory() {
                 Preview
               </label>
               <div className="relative w-full max-w-sm mx-auto">
-                <div className="relative h-48 rounded-lg overflow-hidden bg-gray-200">
-                  {formData.imgUrlPreview ? (
-                    <img
-                      src={formData.imgUrlPreview}
-                      alt="Category preview"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
-                      <span className="text-gray-500 text-sm">Click "Fetch Image" to load preview</span>
-                    </div>
-                  )}
-                  
+                <div className="relative h-48 rounded-2xl overflow-hidden bg-gray-200 shadow">
+                  <CategoryImagePreview
+                    imgUrl={formData.imgUrlPreview}
+                    name={formData.name || 'Category Name'}
+                    size="full"
+                    shape="rounded-2xl"
+                    className="transition-transform duration-300"
+                  />
+                  {/* Gradient overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                   {/* Text Overlay */}
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <h3 className="text-white text-xl font-bold text-center px-4 drop-shadow-lg">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <h3 className="text-white text-2xl font-extrabold text-center px-4 drop-shadow-lg truncate">
                       {formData.name || 'Category Name'}
                     </h3>
                   </div>
                 </div>
               </div>
-
               {/* Current Preview URL Display */}
               {formData.imgUrlPreview && (
                 <div className="mt-2 p-2 bg-green-50 rounded text-xs">

@@ -99,3 +99,29 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: #000000 !important;
 }
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: none;}
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: none;}
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-40px);}
+  to { opacity: 1; transform: none;}
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-20px);}
+}
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(30px);}
+}
+.animate-fadein { animation: fadein 0.7s cubic-bezier(.4,0,.2,1) both; }
+.animate-slide-up { animation: slide-up 0.8s cubic-bezier(.4,0,.2,1) both; }
+.animate-slide-down { animation: slide-down 0.8s cubic-bezier(.4,0,.2,1) both; }
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+.animate-float-slower { animation: float-slower 8s ease-in-out infinite; }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import CategoryImagePreview from '@/components/CategoryImagePreview';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
@@ -50,6 +51,8 @@ export default function AdminCategories() {
     return <div>Loading...</div>;
   }
 
+
+
   return (
     <AdminLayout>
       <div className="space-y-8 min-h-screen py-8 px-2 sm:px-0">
@@ -85,6 +88,7 @@ export default function AdminCategories() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-blue-50 sticky top-0 z-10">
                   <tr>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Image</th>
                     <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Name</th>
                     <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Slug</th>
                     <th className="px-6 py-3 text-left text-xs font-bold text-blue-700 uppercase tracking-wider">Description</th>
@@ -94,6 +98,19 @@ export default function AdminCategories() {
                 <tbody className="bg-white divide-y divide-gray-100">
                   {categories.map((category) => (
                     <tr key={category.id} className="hover:bg-blue-50 transition">
+                      {/* Image thumbnail column */}
+                      <td className="px-6 py-4 whitespace-nowrap align-middle">
+                        <div className="flex items-center justify-center">
+                          <CategoryImagePreview
+                            imgUrl={category.imgUrl}
+                            name={category.name}
+                            size="small"
+                            shape="rounded-lg"
+                            className="shadow border border-gray-200 bg-white"
+                          />
+                        </div>
+                      </td>
+
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-base font-semibold text-blue-900">{category.name}</div>
                       </td>
