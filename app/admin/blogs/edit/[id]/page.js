@@ -153,7 +153,7 @@ export default function EditBlog({ params }) {
       });
       router.push('/admin/blogs');
     } catch (error) {
-      console.error('Error updating blog:', error);
+      console.log('Error updating blog:', error);
       throw error;
     }
   };
