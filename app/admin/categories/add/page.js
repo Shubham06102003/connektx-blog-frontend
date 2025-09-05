@@ -120,8 +120,7 @@ export default function AddCategory() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    imgUrlInput: '', // URL input field
-    imgUrlPreview: '', // URL used for preview
+    imgUrlInput: '', // URL input field (used for preview and submit)
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -138,27 +137,19 @@ export default function AddCategory() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFetchImage = () => {
-    if (formData.imgUrlInput.trim()) {
-      setFormData(prev => ({ ...prev, imgUrlPreview: prev.imgUrlInput.trim() }));
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!formData.name.trim()) {
       alert('Name is required');
       return;
     }
-
     setIsSubmitting(true);
     try {
       await adminApi.createCategory({
         name: formData.name,
         description: formData.description,
         slug: formData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-        imgUrl: formData.imgUrlPreview,
+        imgUrl: formData.imgUrlInput,
       });
       router.push('/admin/categories');
     } catch (error) {
@@ -217,30 +208,19 @@ export default function AddCategory() {
             <label htmlFor="imgUrlInput" className="block text-sm font-medium text-gray-700 mb-2">
               Image URL
             </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                id="imgUrlInput"
-                name="imgUrlInput"
-                value={formData.imgUrlInput}
-                onChange={handleInputChange}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter image URL"
-              />
-              <button
-                type="button"
-                onClick={handleFetchImage}
-                disabled={!formData.imgUrlInput.trim()}
-                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Image size={16} />
-                Fetch Image
-              </button>
-            </div>
+            <input
+              type="text"
+              id="imgUrlInput"
+              name="imgUrlInput"
+              value={formData.imgUrlInput}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter image URL (Google Drive or direct)"
+            />
           </div>
 
           {/* Category Card Preview */}
-          {(formData.imgUrlPreview || formData.name) && (
+          {(formData.imgUrlInput || formData.name) && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Preview
@@ -248,7 +228,7 @@ export default function AddCategory() {
               <div className="relative w-full max-w-sm mx-auto">
                 <div className="relative h-48 rounded-2xl overflow-hidden bg-gray-200 shadow">
                   <CategoryImagePreview
-                    imgUrl={formData.imgUrlPreview}
+                    imgUrl={formData.imgUrlInput}
                     name={formData.name || 'Category Name'}
                     size="full"
                     shape="rounded-2xl"
@@ -265,10 +245,10 @@ export default function AddCategory() {
                 </div>
               </div>
               {/* Current Preview URL Display */}
-              {formData.imgUrlPreview && (
+              {formData.imgUrlInput && (
                 <div className="mt-2 p-2 bg-green-50 rounded text-xs">
                   <span className="text-green-600 font-medium">✓ Preview URL: </span>
-                  <span className="text-gray-600 break-all">{formData.imgUrlPreview}</span>
+                  <span className="text-gray-600 break-all">{formData.imgUrlInput}</span>
                 </div>
               )}
             </div>

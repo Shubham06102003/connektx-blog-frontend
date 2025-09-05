@@ -53,10 +53,13 @@ export default function EditCategory({ params }) {
   const handleSubmit = async (categoryData) => {
     if (!resolvedParams) return;
     try {
+      console.log('Submitting updated category data:', categoryData);
+      console.log(resolvedParams.id);
       await adminApi.updateCategory(resolvedParams.id, {
         ...categoryData,
-        slug: categoryData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+        slug: categoryData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
       });
+      console.log('Updated category data:', categoryData);
       router.push('/admin/categories');
     } catch (error) {
       console.error('Error updating category:', error);
