@@ -112,7 +112,7 @@ import { auth } from '@/lib/auth';
 import { adminApi } from '@/lib/api';
 import AdminLayout from '@/components/AdminLayout';
 import { Save, Image } from 'lucide-react';
-import CategoryImagePreview from '@/components/CategoryImagePreview';
+import ImagePreview from '@/components/ImagePreview';
 
 export default function AddCategory() {
   const router = useRouter();
@@ -227,7 +227,7 @@ export default function AddCategory() {
               </label>
               <div className="relative w-full max-w-sm mx-auto">
                 <div className="relative h-48 rounded-2xl overflow-hidden bg-gray-200 shadow">
-                  <CategoryImagePreview
+                  <ImagePreview
                     imgUrl={formData.imgUrlInput}
                     name={formData.name || 'Category Name'}
                     size="full"

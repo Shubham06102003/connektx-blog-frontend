@@ -35,21 +35,21 @@ export default function AdminLayout({ children }) {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
+  <div className="h-screen flex bg-gradient-to-br from-blue-50 via-white to-blue-100" style={{ fontFamily: 'Inter, Nunito Sans, Lato, sans-serif' }}>
       {/* Sidebar */}
       <div className={`
-        fixed lg:static inset-y-0 left-0 z-50 w-60 bg-white border-r border-gray-200 shadow-sm flex flex-col h-screen
+        fixed lg:static top-0 left-0 z-50 w-64 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 border-r border-blue-900 shadow-xl flex flex-col h-screen
         transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
-      `}>
+      `} style={{height: '100vh'}}>
         {/* Logo */}
-        <div className="flex h-16 items-center justify-between px-5 border-b border-gray-100">
-          <Link href="/" className="text-lg font-bold text-blue-700 tracking-tight">
+        <div className="flex h-16 items-center justify-between px-5 border-b border-blue-800">
+          <Link href="/" className="text-xl font-extrabold text-white tracking-tight drop-shadow-lg">
             Admin
           </Link>
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 text-white hover:bg-blue-800 rounded"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
@@ -65,10 +65,10 @@ export default function AdminLayout({ children }) {
                 key={item.name}
                 href={item.href}
                 className={`
-                  flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors
+                  flex items-center px-4 py-2 text-base font-semibold rounded-lg transition-colors
                   ${isActivePage(item.href)
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-gradient-to-r from-blue-700 to-blue-600 text-white shadow-lg'
+                    : 'text-blue-100 hover:bg-blue-800 hover:text-white'
                   }
                 `}
                 onClick={() => setSidebarOpen(false)}
@@ -80,10 +80,10 @@ export default function AdminLayout({ children }) {
           })}
         </nav>
         {/* Logout */}
-        <div className="p-4 border-t border-gray-100 mt-auto">
+        <div className="p-4 border-t border-blue-800 mt-auto">
           <button
             onClick={handleLogout}
-            className="flex w-full items-center px-4 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50"
+            className="flex w-full items-center px-4 py-2 text-base font-semibold text-red-400 rounded-lg hover:bg-blue-800 hover:text-red-200 transition-colors"
           >
             <LogOut className="mr-3 h-5 w-5" />
             Logout
@@ -95,7 +95,7 @@ export default function AdminLayout({ children }) {
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="p-2 bg-white border border-gray-200 rounded shadow"
+          className="p-2 bg-blue-900 border border-blue-800 rounded shadow text-white hover:bg-blue-800"
           aria-label="Open sidebar"
         >
           <Menu size={24} />
@@ -103,7 +103,7 @@ export default function AdminLayout({ children }) {
       </div>
 
       {/* Main content */}
-      <main className="flex-1 min-h-screen flex flex-col items-stretch">
+      <main className="flex-1 h-screen overflow-y-auto flex flex-col items-stretch">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-8">
           {children}
         </div>
