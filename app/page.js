@@ -3,6 +3,7 @@ import BlogCard from '@/components/BlogCard';
 import FeaturedSection from '@/components/FeaturedSection';
 import CategoryCard from '@/components/CategoryCard';
 import Link from 'next/link';
+import Header from '@/components/Header';
 
 export const metadata = {
   title: 'Blog Platform - Latest Articles and Stories',
@@ -39,32 +40,15 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100">
-      {/* Header */}
-      <header className="bg-white/90 shadow-md border-b border-blue-100 rounded-b-2xl backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-3xl font-extrabold tracking-tight text-blue-700 drop-shadow-sm">
-              ConnektX Blog
-            </Link>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-blue-700 hover:text-blue-500 font-semibold transition-colors">Home</Link>
-              <Link href="/blogs" className="text-blue-500 hover:text-blue-700 font-medium transition-colors">Blogs</Link>
-              <Link href="/categories" className="text-blue-500 hover:text-blue-700 font-medium transition-colors">Categories</Link>
-            </nav>
-            <Link
-              href="/admin"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition-colors"
-            >
-              Admin
-            </Link>
-          </div>
-        </div>
-      </header>
+  <Header />
 
       <main>
         {/* Featured Blogs Section */}
-        <section className="bg-blue-600 py-10 mb-5 rounded-b-3xl shadow-lg relative overflow-hidden">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-lg tracking-tight animate-fadein">Featured Blogs</h2>
+        <section className="relative py-14 mb-8 bg-gradient-to-br from-blue-700 via-blue-500 to-blue-300 rounded-b-3xl shadow-2xl overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <svg className="absolute top-0 left-0 w-full h-full opacity-20" viewBox="0 0 1440 320"><path fill="#fff" fillOpacity="0.3" d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,133.3C672,107,768,85,864,101.3C960,117,1056,171,1152,186.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-lg tracking-tight mb-10 animate-fadein">Featured Blogs</h2>
           <FeaturedSection blogs={featuredBlogs} />
         </section>
 

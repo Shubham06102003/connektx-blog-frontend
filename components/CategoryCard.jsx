@@ -135,29 +135,30 @@
 
 import React from 'react';
 import Link from 'next/link';
-import CategoryImagePreview from './CategoryImagePreview';
+import ImagePreview from './ImagePreview';
 
 export default function CategoryCard({ category }) {
   return (
     <Link
       href={`/categories/${category.slug}`}
-      className="w-full max-w-[420px] aspect-[4/3] rounded-2xl shadow-lg overflow-hidden relative group transition-transform duration-200 hover:-translate-y-1 hover:shadow-2xl cursor-pointer block"
+      className="w-full max-w-[420px] aspect-[4/3] rounded-3xl shadow-xl overflow-hidden relative group transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl cursor-pointer block border border-blue-50 bg-gradient-to-br from-blue-50 via-white to-blue-100"
       prefetch={false}
+      style={{ fontFamily: 'Inter, Nunito Sans, Lato, sans-serif' }}
     >
       <div className="absolute inset-0 w-full h-full">
-        <CategoryImagePreview
+  <ImagePreview
           imgUrl={category.imgUrl}
           name={category.name}
           size="full"
-          shape="rounded-2xl"
+          shape="rounded-3xl"
           className="transition-transform duration-300 group-hover:scale-105"
         />
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-blue-700/20 to-transparent" />
       </div>
       {/* Centered category name over image */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center drop-shadow-lg px-4 truncate" title={category.name}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center drop-shadow-lg px-4 truncate tracking-tight" title={category.name}>
           {category.name}
         </h2>
       </div>

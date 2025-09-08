@@ -1,8 +1,11 @@
 "use client";
 
+import { publicApi as api } from '@/lib/api'; // Adjust the import path based on your project structure
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { api } from '@/lib/api'; // Adjust the import path based on your project structure
+
+import BlogCard from '@/components/BlogCard';
+import Header from '@/components/Header';
 
 export default function BlogsByCategoryPage() {
   const { categorySlug } = useParams();
@@ -20,7 +23,7 @@ export default function BlogsByCategoryPage() {
         setError(null);
         
         // Assuming your API returns { blogs: [], category: {} } or similar
-        const response = await api.get(`/categories/${categorySlug}/blogs`);
+  const response = await api.getBlogsByCategory(categorySlug);
         
         setBlogs(response.data.blogs || response.data);
         setCategory(response.data.category || { name: categorySlug });
@@ -62,7 +65,8 @@ export default function BlogsByCategoryPage() {
 
   return (
     <div className="bg-white min-h-screen">
-    <div className="container mx-auto px-4 py-8">
+      <Header />
+      <div className="container mx-auto px-4 py-8">
       {/* Category Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">
@@ -85,84 +89,8 @@ export default function BlogsByCategoryPage() {
       ) : (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogs.map((blog) => (
-            <article key={blog.id || blog.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              {/* Featured Image */}
-              {blog.featuredImage && (
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={blog.featuredImage} 
-                    alt={blog.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              )}
-              
-              {/* Content */}
-              <div className="p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
-                  <a 
-                    href={`/blogs/${blog.slug}`} 
-                    className="hover:text-blue-600 transition-colors"
-                  >
-                    {blog.title}
-                  </a>
-                </h2>
-                
-                {blog.excerpt && (
-                  <p className="text-gray-600 mb-4 line-clamp-3">{blog.excerpt}</p>
-                )}
-                
-                {/* Meta Information */}
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <div className="flex items-center space-x-4">
-                    {blog.author && (
-                      <span>By {blog.author.name || blog.author}</span>
-                    )}
-                    {blog.publishedAt && (
-                      <span>{new Date(blog.publishedAt).toLocaleDateString()}</span>
-                    )}
-                  </div>
-                  {blog.readTime && (
-                    <span>{blog.readTime} min read</span>
-                  )}
-                </div>
-                
-                {/* Tags */}
-                {blog.tags && blog.tags.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {blog.tags.slice(0, 3).map((tag, index) => (
-                      <span 
-                        key={index}
-                        className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </article>
+            <BlogCard key={blog.id || blog.slug} blog={blog} />
           ))}
-        </div>
-      )}
-
-      {/* Pagination (if needed) */}
-      {blogs.length > 0 && (
-        <div className="mt-12 flex justify-center">
-          <nav className="flex space-x-2">
-            <button className="px-4 py-2 text-gray-600 bg-gray-100 rounded hover:bg-gray-200 disabled:opacity-50">
-              Previous
-            </button>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded">
-              1
-            </button>
-            <button className="px-4 py-2 text-gray-600 bg-gray-100 rounded hover:bg-gray-200">
-              2
-            </button>
-            <button className="px-4 py-2 text-gray-600 bg-gray-100 rounded hover:bg-gray-200">
-              Next
-            </button>
-          </nav>
         </div>
       )}
     </div>

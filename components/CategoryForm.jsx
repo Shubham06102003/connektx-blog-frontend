@@ -30,34 +30,37 @@ export default function CategoryForm({ onSubmit, submitButtonText, initialData }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-xl shadow max-w-xl mx-auto">
+    <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-3xl shadow-2xl max-w-xl mx-auto border border-blue-50" style={{ fontFamily: 'Inter, Nunito Sans, Lato, sans-serif' }}>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+        <label className="block text-base font-semibold text-blue-900 mb-2 tracking-tight">Name</label>
         <input
           name="name"
           value={form.name}
           onChange={handleChange}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-lg bg-blue-50 placeholder:text-blue-300"
+          placeholder="Enter category name"
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+        <label className="block text-base font-semibold text-blue-900 mb-2 tracking-tight">Description</label>
         <textarea
           name="description"
           value={form.description}
           onChange={handleChange}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-lg bg-blue-50 placeholder:text-blue-300"
+          placeholder="Enter description"
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
+        <label className="block text-base font-semibold text-blue-900 mb-2 tracking-tight">Image URL</label>
         <input
           name="imgUrl"
           value={form.imgUrl}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-lg bg-blue-50 placeholder:text-blue-300"
+          placeholder="Paste image URL (Google Drive or direct)"
         />
       </div>
       {error && <div className="text-red-500 text-sm">{error}</div>}
@@ -65,7 +68,7 @@ export default function CategoryForm({ onSubmit, submitButtonText, initialData }
         <button
           type="submit"
           disabled={saving}
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+          className="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold text-lg shadow hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition-all"
         >
           {saving ? 'Saving...' : submitButtonText}
         </button>
