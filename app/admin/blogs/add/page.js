@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import LoadingScreen from '@/components/LoadingScreen';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { adminApi, publicApi } from '@/lib/api';
@@ -46,7 +47,7 @@ export default function AddBlog() {
   };
 
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

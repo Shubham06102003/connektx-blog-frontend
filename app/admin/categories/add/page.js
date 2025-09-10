@@ -107,6 +107,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import LoadingScreen from '@/components/LoadingScreen';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { adminApi } from '@/lib/api';
@@ -161,7 +162,7 @@ export default function AddCategory() {
   };
 
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

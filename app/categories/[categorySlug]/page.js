@@ -1,11 +1,12 @@
 "use client";
 
-import { publicApi as api } from '@/lib/api'; // Adjust the import path based on your project structure
+
+import { publicApi as api } from '@/lib/api';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-
 import BlogCard from '@/components/BlogCard';
 import Header from '@/components/Header';
+import LoadingScreen from '@/components/LoadingScreen';
 
 export default function BlogsByCategoryPage() {
   const { categorySlug } = useParams();
@@ -39,11 +40,7 @@ export default function BlogsByCategoryPage() {
   }, [categorySlug]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
+    return <LoadingScreen message="Loading blogs..." />;
   }
 
   if (error) {

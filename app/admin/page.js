@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import LoadingScreen from '@/components/LoadingScreen';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { publicApi } from '@/lib/api';
@@ -95,7 +96,7 @@ export default function AdminDashboard() {
   };
 
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

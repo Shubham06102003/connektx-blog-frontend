@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import LoadingScreen from '@/components/LoadingScreen';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
@@ -48,7 +49,7 @@ export default function AdminBlogs() {
   };
 
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (
@@ -69,7 +70,7 @@ export default function AdminBlogs() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-blue-700 font-semibold text-lg">Loading blogs...</div>
+          <LoadingScreen message="Loading blogs..." />
         ) : blogs.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-3xl shadow-2xl border border-blue-50">
             <p className="text-blue-500 text-xl mb-4">No blogs yet</p>
